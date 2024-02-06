@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class LoanTypesModel extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    protected $table = 'loan_types';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -43,17 +45,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    static public function getAllRecord() {
-        return self::where('is_delete', '=', 0)->get();
+    static function getAllRecord() {
+      return self::get();  
     }
 
     static public function getSingle($id) {
         return self::find($id);
     }
-
-    public function getProfileImage() {
-        if(!empty($this->profile_image) && file_exists('upload/profile/'.$this->profile_image)) {
-            return url('upload/profile/'.$this->profile_image);
-        }
-    }
+   
 }
