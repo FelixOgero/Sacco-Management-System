@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="pagetitle">
-        <h1>Loan Types List</h1>
+        <h1>Loan Plan List</h1>
     </div>
 
     <section class="section">
@@ -12,15 +12,14 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">
-                    <a class="btn btn-primary" href="{{ url('admin/loan_types/add') }}">Add Loan Type</a>
+                    <a class="btn btn-primary" href="{{ url('admin/loan_plan/add') }}">Add Loan Plan</a>
                 </h5>
                  <!-- Table with stripped rows -->
             <table class="table datatable">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Type Name</th>
-                    <th scope="col">Description</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Create Date</th>
                     <th scope="col">Update Date</th>
                     <th scope="col">Action</th>
@@ -30,13 +29,17 @@
                   @foreach($getRecord as $value)
                   <tr>
                     <th scope="row">{{ $value->id}}</th>
-                    <td>{{ $value->type_name}}</td>
-                    <td>{{ $value->description}}</td>
+                    <td>
+                        <p>Years/Months: <b>{{ $value->months}}</b></p>
+                        <p>Interest: <b>{{ $value->interest_percentage}} %</b></p>
+                        <p>Overdue Penalty: <b>{{ $value->penalty_rate}}</b></p>
+                    </td>
+                    
                     <td>{{ date('d-m-Y', strtotime($value->created_at))}}</td>
                     <td>{{ date('d-m-Y', strtotime($value->updated_at))}}</td>
                     <td>
-                      <a href="{{ url('admin/loan_types/edit/'.$value->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
-                      <a href="{{ url('admin/loan_types/delete/'.$value->id) }}" type="button" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                      <a href="{{ url('admin/loan_plan/edit/'.$value->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                      <a href="{{ url('admin/loan_plan/delete/'.$value->id) }}" type="button" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                     </td>
                   </tr>
                   @endforeach

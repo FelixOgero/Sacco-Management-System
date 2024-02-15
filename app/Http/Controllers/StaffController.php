@@ -72,6 +72,7 @@ class StaffController extends Controller
         $save = request()->validate([ 
             'name'=>'required',
             'surname' => 'required',
+            'email'=> 'required|unique:users',
             'is_role' => 'required',
         ]);
 

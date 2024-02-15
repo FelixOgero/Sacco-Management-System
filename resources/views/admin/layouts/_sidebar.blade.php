@@ -25,6 +25,27 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link @if(Request::segment(2) == 'loan_plan') @else collapsed @endif" href="{{ url('admin/loan_plan/list')}}">
+          <i class="bi bi-person"></i>
+          <span>Loan Plan</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link @if(Request::segment(2) == 'loan') @else collapsed @endif" href="{{ url('admin/loan/list')}}">
+          <i class="bi bi-person"></i>
+          <span>Loan</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link @if(Request::segment(2) == 'loan_user') @else collapsed @endif" href="{{ url('admin/loan_user/list')}}">
+          <i class="bi bi-person"></i>
+          <span>Loan User</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="">
           <i class="bi bi-person"></i>
           <span>Profile</span>
