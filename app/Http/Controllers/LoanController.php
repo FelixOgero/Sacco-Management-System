@@ -17,6 +17,7 @@ class LoanController extends Controller
     public function index()
     {
         $data['getRecord'] = LoanModel::getAllRecord();
+        $data['meta_title'] = 'Loan List';
         return view('admin.loan.index', $data);
     }
 
@@ -29,6 +30,7 @@ class LoanController extends Controller
         $data['getLoanUser'] = LoanUserModel::get();
         $data['getLoanTypes'] = LoanTypesModel::get();
         $data['getLoanPlan'] = LoanPlanModel::get();
+        $data['meta_title'] = 'Add Loan';
         return view('admin.loan.create', $data);
     }
 
@@ -68,6 +70,7 @@ class LoanController extends Controller
         $data['getLoanTypes'] = LoanTypesModel::get();
         $data['getLoanPlan'] = LoanPlanModel::get();
         $data['getRecord'] = LoanModel::getSingle($id);
+        $data['meta_title'] = 'Edit Loan';
         return view("admin.loan.edit", $data);
 
     }

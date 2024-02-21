@@ -1,3 +1,7 @@
+@php
+  $GetLogoImage = App\Models\WebsiteLogoModel::find(1);
+@endphp 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +9,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - UMOJA SACCO</title>
+  <title>{{ !empty($meta_title) ? $meta_title : ''}} - UMOJA SACCO</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ url('assets/img/favicon.png')}}" rel="icon">
+  <link href="{{ $GetLogoImage->getLogo() }}" rel="icon">
   <link href="{{ url('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->

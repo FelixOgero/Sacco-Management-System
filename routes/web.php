@@ -25,6 +25,8 @@ Route::post('login_post', [AuthController::class,'login_post']);
 Route::get('register', [AuthController::class,'register']);
 Route::post('register_post', [AuthController::class,'register_post']);
 Route::get('forgot', [AuthController::class,'forgot']);
+Route::post('forgot/post', [AuthController::class,'forgot_post']);
+Route::get('terms', [AuthController::class,'terms']);
 
 Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/dashboard', [DashboardController::class,'index']);
@@ -34,6 +36,7 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/staff/delete/{id}', [StaffController::class,'staff_delete']);
     Route::get('admin/staff/edit/{id}', [StaffController::class,'staff_edit']);
     Route::post('admin/staff/edit/{id}', [StaffController::class,'staff_edit_update']);
+    Route::get('admin/staff/view/{id}', [StaffController::class,'staff_view']);
 
     // Loan Type
     Route::get('admin/loan_types/list', [LoanTypesController::class,'index']);
@@ -64,10 +67,28 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/loan_user/add', [LoanUserController::class,'create']);
     Route::post('admin/loan_user/add', [LoanUserController::class,'store']);
     Route::get('admin/loan_user/delete/{id}', [LoanUserController::class,'destroy']);
+    Route::get('admin/loan_user/edit/{id}', [LoanUserController::class,'edit']);
+    Route::post('admin/loan_user/edit/{id}', [LoanUserController::class,'update']);
+
+    //Profile
+    Route::get('admin/profile', [DashboardController::class,'profile']);
+    Route::post('admin/profile/update', [DashboardController::class,'profile_update']);
+
+    // Logo
+    Route::get('admin/logo', [DashboardController::class,'website_logo']);
+    Route::post('admin/logo_update', [DashboardController::class,'logo_update']);
 });
 
 Route::group(['middleware' => 'staff'], function() {
     Route::get('staff/dashboard', [DashboardController::class,'index']);
+
+    //Loan User
+    Route::get('staff/loan_user/list', [LoanUserController::class,'staff_loan_user']);
+    Route::get('staff/loan_user/delete/{id}', [LoanUserController::class,'loan_user_delete']);
+
+    Route::get('staff/profile', [DashboardController::class,'staff_profile']);
+    Route::post('staff/profile_update', [DashboardController::class,'staff_profile_update']);
+    
 });
 
 Route::get('logout', [AuthController::class,'logout']);

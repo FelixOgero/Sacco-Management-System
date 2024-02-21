@@ -1,3 +1,7 @@
+@php
+  $GetLogoImage = App\Models\WebsiteLogoModel::find(1);
+@endphp 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +9,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Login - UMOJA SACCO</title>
+  <title>{{ !empty($meta_title) ? $meta_title : ''}} - UMOJA SACCO</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+  <link href="{{ $GetLogoImage->getLogo() }}" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -45,8 +49,8 @@
 
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  {{-- <img src="assets/img/logo.png" alt=""> --}}
-                  <span class="d-none d-lg-block">SACCO</span>
+                  <img src="{{ $GetLogoImage->getLogo() }}" alt="">
+                  <span class="d-none d-lg-block">{{ $GetLogoImage->name }}</span>
                 </a>
               </div><!-- End Logo -->
 

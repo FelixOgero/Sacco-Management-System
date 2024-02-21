@@ -40,6 +40,7 @@
                   <td>{{ !empty($value->is_role) ? 'Admin' : 'Staff'}}</td>
                   <td>{{ date('d-m-Y', strtotime($value->created_at))}}</td>
                   <td>
+                    <a href="{{ url('admin/staff/view/'.$value->id) }}" class="btn btn-warning"><i class="bi bi-eye"></i></a>
                     <a href="{{ url('admin/staff/edit/'.$value->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
                     <a href="{{ url('admin/staff/delete/'.$value->id) }}" type="button" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                   </td>

@@ -9,10 +9,12 @@ class LoanTypesController extends Controller
 {
     public function index() {
         $data['getRecord'] = LoanTypesModel::getAllRecord();
+        $data['meta_title'] = 'Loan Types List';
         return view ("admin.loan_types.list", $data);
     }
     public function add() {
-        return view ("admin.loan_types.add");
+        $data['meta_title'] = 'Add Loan Type';
+        return view ("admin.loan_types.add", $data);
     }
 
     public function store(Request $request) {
@@ -38,6 +40,7 @@ class LoanTypesController extends Controller
 
     public function edit($id, Request $request) {
         $data['getRecord'] = LoanTypesModel::getSingle($id);
+        $data['meta_title'] = 'Edit Loan Type';
         return view('admin.loan_types.edit', $data);
     }
     

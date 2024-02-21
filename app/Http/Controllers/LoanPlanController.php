@@ -9,11 +9,13 @@ class LoanPlanController extends Controller
 {
     public function index() {
         $data['getRecord'] = LoanPlanModel::getAllRecord();
+        $data['meta_title'] = 'Loan Plan List';
         return view("admin.loan_plan.list", $data);
     }
 
     public function add() {
-        return view("admin.loan_plan.add");
+        $data['meta_title'] = 'Add Loan Plan';
+        return view("admin.loan_plan.add", $data);
     }
 
     public function store(Request $request) {
@@ -29,6 +31,7 @@ class LoanPlanController extends Controller
 
     public function edit($id, Request $request) {
         $data['getRecord'] = LoanPlanModel::getSingle($id);
+        $data['meta_title'] = 'Edit Loan Plan';
         return view("admin.loan_plan.edit", $data);
     }
     

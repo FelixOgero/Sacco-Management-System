@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\StaffNewAccountCreateMail;
 
 class StaffController extends Controller
 {
     public function index(Request $request) {
         $data['getRecord'] = User::getAllRecord();
+        $data['meta_title'] = 'Staff List';
         return view("admin.staff.list", $data);
     }
 
     public function add(Request $request) {
-        return view('admin.staff.add');
+        $data['meta_title'] = 'Add Staff';
+        return view('admin.staff.add', $data);
     }
 
     public function add_store(Request $request) {
@@ -26,6 +31,7 @@ class StaffController extends Controller
             'surname' => 'required',
             'email'=> 'required|unique:users',
             'is_role' => 'required',
+            'password'=> 'required',
         ]);
 
         $save = new User();
@@ -47,7 +53,15 @@ class StaffController extends Controller
 
         $save->remember_token = Str::random(50);
 
+        $random_password = $request->password;
+
+        $save->password = Hash::make($random_password);
+
         $save->save();
+
+        $save->random_password = $random_password;
+
+        Mail::to($save->email)->send(new StaffNewAccountCreateMail($save)); 
 
         return redirect('admin/staff/list')->with('success','Account Successfully Created.');
         
@@ -63,6 +77,7 @@ class StaffController extends Controller
 
     public function staff_edit($id, Request $request) {
         $data['getRecord'] = User::getSingle($id); 
+        $data['meta_title'] = 'Edit Staff';
         return view('admin.staff.edit', $data);
     }
 
@@ -72,7 +87,8 @@ class StaffController extends Controller
         $save = request()->validate([ 
             'name'=>'required',
             'surname' => 'required',
-            'email'=> 'required|unique:users',
+            'email'=> 'required',
+            // 'email'=> 'required|unique:users',
             'is_role' => 'required',
         ]);
 
@@ -104,5 +120,12 @@ class StaffController extends Controller
 
         return redirect('admin/staff/list')->with('success','Account Successfully Updated.');
         
+    }
+
+    public function staff_view($id){
+        $data['getRecord'] = User::getSingle($id);
+        // $data['getRecord'] = User::where('id', $id)->where('is_delete', 0)->first();
+        $data['meta_title'] = 'View Staff';
+        return view('admin.staff.view', $data);
     }
 }

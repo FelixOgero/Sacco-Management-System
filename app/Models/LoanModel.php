@@ -69,5 +69,14 @@ class LoanModel extends Authenticatable
     public function getLoanPlan() {
         return $this->belongsTo(LoanPlanModel::class, 'loan_plan_id');
     }
+
+    static public function getLoanStaff($staff_id) {
+        return self::select('loan.*','users.name', 'users.last_name', 'users.surname', 'loan_types.type_name', 'loan_plan.months')
+        ->join('users', 'users.id', '=', 'loan.user_id')
+        ->join('loan_types','loan_types.id','=','loan.loan_types_id')
+        ->join('loan_plan','loan_plan.id','=','loan.loan_plan_id')
+        ->where('loan.staff_id', '=', $staff_id)
+        ->orderBy('loan.id','desc')->get();
+    }
    
 }
