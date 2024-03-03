@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DividendsModel;
 use App\Models\User;
 use App\Models\LoanModel;
 use Illuminate\Support\Str;
@@ -9,7 +10,9 @@ use Illuminate\Http\Request;
 use App\Models\LoanPlanModel;
 use App\Models\LoanTypesModel;
 use App\Models\LoanUserModel;
+use App\Models\SavingsModel;
 use App\Models\WebsiteLogoModel;
+use App\Models\WithdrawalsModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,11 +22,18 @@ class DashboardController extends Controller
         if (Auth::user()->is_role == 1) { //admin
 
             // $data['getStaffandAdminCount'] = User::where('is_delete', '=', '0')->count();
-            $data['getStaffandAdminCount'] = User::count();
+            // $data['getStaffandAdminCount'] = User::count();
+            $data['getAdminCount'] = User::where('is_role', 1)->where('is_delete', 0)->count();
+            $data['getStaffCount'] = User::where('is_role', 0)->where('is_delete', 0)->count();
             $data['getLoanTypeCount'] = LoanTypesModel::count();
             $data['getLoanPlanCount'] = LoanPlanModel::count();
             $data['getLoanCount'] = LoanModel::count();
             $data['getLoanUserCount'] = LoanUserModel::count();
+            $data['getTotalSavings'] = SavingsModel::sum('amount');
+            $data['getTotalLoan'] = LoanModel::sum('loan_amount');
+            $data['getTotalWithdrawals'] = WithdrawalsModel::sum('amount_withdrawn');
+            $data['getAccumulatedDividends'] = DividendsModel::sum('accumulated_amount');
+            $data['getDividendsPaid'] = DividendsModel::sum('amount');
             $data['meta_title'] = 'Dashboard';
 
             return view('admin.dashboard.list', $data);

@@ -4,10 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\LoanPlanController;
 use App\Http\Controllers\LoanUserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DividendsController;
 use App\Http\Controllers\LoanTypesController;
+use App\Http\Controllers\WithdrawalsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +72,31 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/loan_user/delete/{id}', [LoanUserController::class,'destroy']);
     Route::get('admin/loan_user/edit/{id}', [LoanUserController::class,'edit']);
     Route::post('admin/loan_user/edit/{id}', [LoanUserController::class,'update']);
+
+    //Savings
+    Route::get('admin/savings/list', [SavingsController::class,'index']);
+    Route::get('admin/savings/add', [SavingsController::class,'create']);
+    Route::post('admin/savings/add', [SavingsController::class,'store']);
+    Route::get('admin/savings/delete/{id}', [SavingsController::class,'destroy']);
+    Route::get('admin/savings/edit/{id}', [SavingsController::class,'edit']);
+    Route::post('admin/savings/edit/{id}', [SavingsController::class,'update']);
+
+    //Withdrawals
+    Route::get('admin/withdrawals/list', [WithdrawalsController::class,'index']);
+    Route::get('admin/withdrawals/export', [WithdrawalsController::class, 'export']);
+    Route::get('admin/withdrawals/add', [WithdrawalsController::class,'create']);
+    Route::post('admin/withdrawals/add', [WithdrawalsController::class,'store']);
+    Route::get('admin/withdrawals/delete/{id}', [WithdrawalsController::class,'destroy']);
+    Route::get('admin/withdrawals/edit/{id}', [WithdrawalsController::class,'edit']);
+    Route::post('admin/withdrawals/edit/{id}', [WithdrawalsController::class,'update']);
+
+    //Dividends
+    Route::get('admin/dividends/list', [DividendsController::class,'index']);
+    Route::get('admin/dividends/add', [DividendsController::class,'create']);
+    Route::post('admin/dividends/add', [DividendsController::class,'store']);
+    Route::get('admin/dividends/delete/{id}', [DividendsController::class,'destroy']);
+    Route::get('admin/dividends/edit/{id}', [DividendsController::class,'edit']);
+    Route::post('admin/dividends/edit/{id}', [DividendsController::class,'update']);
 
     //Profile
     Route::get('admin/profile', [DashboardController::class,'profile']);

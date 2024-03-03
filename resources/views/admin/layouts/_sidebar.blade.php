@@ -18,6 +18,13 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link @if(Request::segment(2) == 'loan_user') @else collapsed @endif" href="{{ url('admin/loan_user/list')}}">
+          <i class="bi bi-gem"></i>
+          <span>Loan Users / Members</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link @if(Request::segment(2) == 'loan_types') @else collapsed @endif" href="{{ url('admin/loan_types/list')}}">
           <i class="bi bi-journal-text"></i>
           <span>Loan Types</span>
@@ -39,9 +46,23 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @if(Request::segment(2) == 'loan_user') @else collapsed @endif" href="{{ url('admin/loan_user/list')}}">
-          <i class="bi bi-gem"></i>
-          <span>Loan User</span>
+        <a class="nav-link @if(Request::segment(2) == 'savings') @else collapsed @endif" href="{{ url('admin/savings/list')}}">
+          <i class="bi bi-cash-stack"></i>
+          <span>Savings</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link @if(Request::segment(2) == 'withdrawals') @else collapsed @endif" href="{{ url('admin/withdrawals/list')}}">
+          <i class="bi bi-arrow-left-right"></i>
+          <span>Withdrawals</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link @if(Request::segment(2) == 'dividends') @else collapsed @endif" href="{{ url('admin/dividends/list')}}">
+          <i class="bi bi-cash-coin"></i>
+          <span>Dividends</span>
         </a>
       </li>
 

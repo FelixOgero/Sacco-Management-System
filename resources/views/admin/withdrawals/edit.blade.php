@@ -1,0 +1,103 @@
+@extends('admin.layouts.app')
+@section('content')
+
+<div class="pagetitle">
+    <h1>Edit Withdrawal</h1>
+    
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Withdrawal</h5>
+
+            <!-- General Form Elements -->
+            <form action="{{ url('admin/withdrawals/edit/'.$getRecord->id) }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
+
+                <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-2 col-form-label">ID Number <span style="color: red"> *</span></label>
+                    <div class="col-sm-10">
+                      <input readonly required type="number" name="id_number" class="form-control" oninput="javascript: this.value = this.value
+                      .replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" value="{{ $getRecord->id_number }}">
+                      <span style="color: red;">{{ $errors->first('id_number')}}</span>
+                    </div>
+                  </div>
+
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">First Name <span style="color: red"> *</span></label>
+                <div class="col-sm-10">
+                  <input required type="text" name="first_name" class="form-control" value="{{ $getRecord->first_name }}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Middle Name <span style="color: red"> *</span></label>
+                <div class="col-sm-10">
+                  <input required type="text" name="middle_name" class="form-control" value="{{ $getRecord->middle_name }}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Last Name <span style="color: red"> *</span></label>
+                <div class="col-sm-10">
+                  <input required type="text" name="last_name" class="form-control" value="{{ $getRecord->last_name }}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Payment Method<span style="color: red"> *</span></label>
+                <div class="col-sm-10">
+                  <input required type="text" name="payment_method" class="form-control" value="{{ $getRecord->payment_method }}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Reference Number <span style="color: red"> *</span></label>
+                <div class="col-sm-10">
+                  <input readonly required type="text" name="reference_number" class="form-control" value="{{ $getRecord->reference_number }}">
+                </div>
+              </div>
+
+                         
+
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Transaction Fee <span style="color: red"> *</span></label>
+                <div class="col-sm-10">
+                  <input readonly required type="number" name="transaction_fee" class="form-control" oninput="javascript: this.value = this.value
+                  .replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" value="{{ $getRecord->transaction_fee }}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Amount Withdrawn <span style="color: red"> *</span></label>
+                <div class="col-sm-10">
+                  <input required type="number" name="amount_withdrawn" class="form-control" oninput="javascript: this.value = this.value
+                  .replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" value="{{ $getRecord->amount_withdrawn }}">
+                </div>
+              </div>
+
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+
+            </form><!-- End General Form Elements -->
+
+          </div>
+        </div>
+
+      </div>
+    
+    </div>
+  </section>
+
+{{-- </main><!-- End #main --> --}}
+
+@endsection
