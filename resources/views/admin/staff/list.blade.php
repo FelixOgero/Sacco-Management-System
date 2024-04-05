@@ -1,6 +1,15 @@
 @extends('admin.layouts.app')
 @section('content')
 
+<style>
+  /* CSS for printing */
+  @media print {
+      .hide-on-print {
+          display: none !important;
+      }
+  }
+</style>
+
 <div class="pagetitle">
     <h1>Staff List</h1>
   </div><!-- End Page Title -->
@@ -13,6 +22,8 @@
           <div class="card-body">
             <h5 class="card-title">
                 <a class="btn btn-primary" href="{{ url('admin/staff/add') }}">Add Staff</a>
+                <!-- Print button -->
+                <button class="btn btn-info" onclick="window.print()">Print</button>
             </h5>
 
             <!-- Table with stripped rows -->
@@ -26,7 +37,7 @@
                   <th scope="col">Email</th>
                   <th scope="col">Is Role</th>
                   <th scope="col">Create Date</th>
-                  <th scope="col">Action</th>
+                  <th scope="col"  class="hide-on-print">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -39,11 +50,14 @@
                   <td>{{ $value->email}}</td>
                   <td>{{ !empty($value->is_role) ? 'Admin' : 'Staff'}}</td>
                   <td>{{ date('d-m-Y', strtotime($value->created_at))}}</td>
-                  <td>
-                    <a href="{{ url('admin/staff/view/'.$value->id) }}" class="btn btn-warning"><i class="bi bi-eye"></i></a>
-                    <a href="{{ url('admin/staff/edit/'.$value->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
-                    <a href="{{ url('admin/staff/delete/'.$value->id) }}" type="button" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger"><i class="bi bi-trash"></i></a>
-                  </td>
+                  <td class="hide-on-print">
+                    <!-- Wrap action buttons in a div for easy targeting -->
+                    <div class="action-buttons">
+                        <a href="{{ url('admin/staff/view/'.$value->id) }}" class="btn btn-warning"><i class="bi bi-eye"></i></a>
+                        <a href="{{ url('admin/staff/edit/'.$value->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ url('admin/staff/delete/'.$value->id) }}" type="button" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                    </div>
+                </td>
                 </tr>
                 @endforeach
               </tbody>
@@ -58,3 +72,4 @@
   </section>
 
 @endsection
+

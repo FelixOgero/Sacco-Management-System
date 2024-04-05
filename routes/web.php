@@ -7,6 +7,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\LoanPlanController;
 use App\Http\Controllers\LoanUserController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DividendsController;
 use App\Http\Controllers\LoanTypesController;
@@ -97,6 +98,14 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/dividends/delete/{id}', [DividendsController::class,'destroy']);
     Route::get('admin/dividends/edit/{id}', [DividendsController::class,'edit']);
     Route::post('admin/dividends/edit/{id}', [DividendsController::class,'update']);
+
+    //Payments
+     Route::get('admin/payments/list', [PaymentsController::class,'index']);
+     Route::get('admin/payments/add', [PaymentsController::class,'create']);
+     Route::post('admin/payments/add', [PaymentsController::class,'store']);
+     Route::get('admin/payments/delete/{id}', [PaymentsController::class,'destroy']);
+     Route::get('admin/payments/edit/{id}', [PaymentsController::class,'edit']);
+     Route::post('admin/payments/edit/{id}', [PaymentsController::class,'update']);
 
     //Profile
     Route::get('admin/profile', [DashboardController::class,'profile']);

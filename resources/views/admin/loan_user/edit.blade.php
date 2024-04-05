@@ -18,6 +18,15 @@
             <form action="{{ url('admin/loan_user/edit/'.$getRecord->id) }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">National ID <span style="color: red"> *</span></label>
+                  <div class="col-sm-10">
+                    <input required type="number" name="national_id" class="form-control" oninput="javascript: this.value = this.value
+                    .replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" value="{{ $getRecord->national_id }}">
+                <span style="color: red;">{{ $errors->first('national_id')}}</span>  
+                </div>
+                </div>
+
               <div class="row mb-3">
                 <label for="inputNumber" class="col-sm-2 col-form-label">First Name <span style="color: red"> *</span></label>
                 <div class="col-sm-10">
@@ -65,7 +74,7 @@
               <div class="row mb-3">
                 <label for="inputNumber" class="col-sm-2 col-form-label">Tax ID <span style="color: red"> *</span></label>
                 <div class="col-sm-10">
-                  <input required type="text" name="tax_id" class="form-control" value="{{ $getRecord->tax_id }}">
+                  <input readonly required type="text" name="tax_id" class="form-control" value="{{ $getRecord->tax_id }}">
                   <span style="color: red;">{{ $errors->first('tax_id')}}</span>
                 </div>
               </div>

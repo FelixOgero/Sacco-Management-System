@@ -43,6 +43,7 @@ class LoanUserController extends Controller
         // } else {}
 
             $save = request()->validate([ 
+                'national_id'=>'required|unique:loan_user',
                 'first_name'=>'required',
                 'middle_name' => 'required',
                 'last_name' => 'required',
@@ -53,6 +54,7 @@ class LoanUserController extends Controller
             ]);
     
             $save = new LoanUserModel;
+            $save->national_id = trim($request->national_id);
             $save->first_name = trim($request->first_name);
             $save->middle_name = trim($request->middle_name);
             $save->last_name = trim($request->last_name);
@@ -90,8 +92,12 @@ class LoanUserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $save = request()->validate([ 
+            'national_id'=>'required|unique:loan_user',
+        ]);
         // dd($request->all());
         $save = LoanUserModel::getSingle($id);
+        $save->national_id = trim($request->national_id);
         $save->first_name = trim($request->first_name);
         $save->middle_name = trim($request->middle_name);
         $save->last_name = trim($request->last_name);

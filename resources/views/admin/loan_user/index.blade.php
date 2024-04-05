@@ -20,6 +20,7 @@
                   <thead>
                     <tr>
                       <th scope="col">#</th>
+                      <th scope="col">National ID</th>
                       <th scope="col">Full Names</th>
                       <th scope="col">Address</th>
                       <th scope="col">Contact and Email</th>
@@ -33,6 +34,7 @@
                     @foreach($getRecord as $value)
                     <tr>
                       <th scope="row">{{ $value->id}}</th>
+                      <td>{{ $value->national_id}}</td>
                       <td>
                           <p>First Name: <b>{{ $value->first_name }}</b></p>
                           <p>Middle Name: <b>{{ $value->middle_name }}</b></p>

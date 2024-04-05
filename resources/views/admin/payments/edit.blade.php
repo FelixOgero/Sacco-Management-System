@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="pagetitle">
-    <h1>Edit Loan Application</h1>
+    <h1>Edit Payment</h1>
     
   </div><!-- End Page Title -->
 
@@ -12,11 +12,27 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Loan Application</h5>
+            <h5 class="card-title">Payment</h5>
 
             <!-- General Form Elements -->
-            <form action="{{ url('admin/loan/edit/'.$getRecord->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('admin/payments/edit/'.$getRecord->id) }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
+
+                <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-2 col-form-label">User National ID</label>
+                    <div class="col-sm-10">
+                      <input required type="number" name="user_national_id" class="form-control" oninput="javascript: this.value = this.value
+                      .replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8" value="{{$getRecord->user_national_id}}" readonly>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-2 col-form-label">User Tax ID</label>
+                    <div class="col-sm-10">
+                      <input required type="number" name="user_tax_id" class="form-control" oninput="javascript: this.value = this.value
+                      .replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="16" value="{{$getRecord->user_tax_id}}" readonly>
+                    </div>
+                  </div>
 
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Loan User</label>
@@ -73,6 +89,22 @@
                 <div class="col-sm-10">
                   <input required type="number" name="loan_amount" class="form-control" oninput="javascript: this.value = this.value
                   .replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" value="{{$getRecord->loan_amount}}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Loan Amount Paid</label>
+                <div class="col-sm-10">
+                  <input required type="number" name="loan_amount_paid" class="form-control" oninput="javascript: this.value = this.value
+                  .replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" value="{{$getRecord->loan_amount_paid}}">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">Loan Amount Pending</label>
+                <div class="col-sm-10">
+                  <input required type="number" name="loan_amount_remaining" class="form-control" oninput="javascript: this.value = this.value
+                  .replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" value="{{$getRecord->loan_amount_remaining}}">
                 </div>
               </div>
 

@@ -18,6 +18,15 @@
             <form action="{{ url('admin/loan_user/add') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">National ID <span style="color: red"> *</span></label>
+                  <div class="col-sm-10">
+                    <input required type="number" name="national_id" class="form-control" oninput="javascript: this.value = this.value
+                    .replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="8">
+                <span style="color: red;">{{ $errors->first('national_id')}}</span>  
+                </div>
+                </div>
+
               <div class="row mb-3">
                 <label for="inputNumber" class="col-sm-2 col-form-label">First Name <span style="color: red"> *</span></label>
                 <div class="col-sm-10">
